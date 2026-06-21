@@ -1,0 +1,22 @@
+{
+  "name": "com.gogzydev.docsforge",
+  "version": "0.1.0",
+  "displayName": "DocsForge Unity",
+  "description": "A Unity editor integration for DocFX that lets you document your entire project — not just scripts, but assets, scenes, folders, and any custom content.",
+  "unity": "6000.5",
+  "type": "tool",
+  "author": {
+    "name": "GogzyDev",
+    "url": "https://github.com/GogzyDev/DocsForge-Unity"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GogzyDev/DocsForge-Unity.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "docfx",
+    "documentation",
+    "editor"
+  ]
+}
