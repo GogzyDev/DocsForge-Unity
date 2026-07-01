@@ -1,0 +1,27 @@
+{
+    "name": "com.gogzydev.docsforge.addressables",
+    "rootNamespace": "DocsForge",
+    "references": [
+        "GUID:a0c7d8b8118905b4c8cf003bc2f98994",
+        "GUID:69448af7b92c7f342b298e06a37122aa"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "DOCSFORGE_ADDRESSABLES"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.addressables",
+            "expression": "",
+            "define": "DOCSFORGE_ADDRESSABLES"
+        }
+    ],
+    "noEngineReferences": false
+}
