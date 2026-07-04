@@ -8,10 +8,17 @@ namespace DocsForge.Markdown.InlineRenderers
     {
         protected override void Append(LinkInline inline, StringBuilder sb, IMarkdownRenderContext ctx)
         {
-            sb.Append("<color=#61AFEF>");
+            var hasUrl = !string.IsNullOrEmpty(inline.Url);
+            if (hasUrl)
+                sb.Append("<link=\"").Append(inline.Url).Append("\">");
+
+            sb.Append("<color=#61AFEF><u>");
             foreach (var child in inline)
                 ctx.AppendInline(child, sb);
-            sb.Append("</color>");
+            sb.Append("</u></color>");
+
+            if (hasUrl)
+                sb.Append("</link>");
         }
     }
 }

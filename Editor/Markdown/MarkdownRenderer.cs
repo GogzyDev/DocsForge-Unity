@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using DocsForge.Markdown.BlockRenderers;
 using DocsForge.Markdown.InlineRenderers;
+using DocsForge.UriResolvers;
 using Markdig;
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UIElements.Experimental;
 
 namespace DocsForge.Markdown
 {
@@ -15,12 +18,13 @@ namespace DocsForge.Markdown
     /// Parses a Markdown string via Markdig and produces a UI Toolkit <see cref="VisualElement"/> tree.
     /// Block and inline rendering is fully extensible: annotate a class with
     /// <see cref="BlockRendererAttribute"/> or <see cref="InlineRendererAttribute"/> and it is
-    /// discovered automatically via TypeCache — no changes to this class required.
+    /// discovered automatically via TypeCache.
     /// </summary>
     public static class MarkdownRenderer
     {
         private const string k_StyleSheetPath =
             "Packages/com.gogzydev.docsforge/Editor/Markdown/MarkdownRenderer.uss";
+        private const string k_LinkHoverClass = "md-link--hover";
 
         private static readonly MarkdownPipeline s_Pipeline =
             new MarkdownPipelineBuilder().Build();
@@ -43,6 +47,11 @@ namespace DocsForge.Markdown
             if (styleSheet != null)
                 container.styleSheets.Add(styleSheet);
 
+            // Handle links on bubbling up.
+            container.RegisterCallback<PointerUpLinkTagEvent>(OnLinkClicked);
+            container.RegisterCallback<PointerOverLinkTagEvent>(OnLinkPointerOver);
+            container.RegisterCallback<PointerOutLinkTagEvent>(OnLinkPointerOut);
+
             if (string.IsNullOrWhiteSpace(markdown))
             {
                 var empty = new Label("(no content)");
@@ -58,6 +67,35 @@ namespace DocsForge.Markdown
                 ctx.RenderBlock(block, container);
 
             return container;
+        }
+
+        private static void OnLinkClicked(PointerUpLinkTagEvent evt)
+        {
+            var uri = evt.linkID;
+            if (string.IsNullOrEmpty(uri))
+                return;
+
+            if (UriResolverRegistry.TryOpenInEditor(uri))
+                return;
+
+            // Fallback to app handled URLs.
+            if (Uri.TryCreate(uri, UriKind.Absolute, out var parsed) &&
+                (parsed.Scheme == Uri.UriSchemeHttp || parsed.Scheme == Uri.UriSchemeHttps))
+            {
+                Application.OpenURL(uri);
+            }
+        }
+
+        private static void OnLinkPointerOver(PointerOverLinkTagEvent evt)
+        {
+            if (evt.target is VisualElement element)
+                element.AddToClassList(k_LinkHoverClass);
+        }
+
+        private static void OnLinkPointerOut(PointerOutLinkTagEvent evt)
+        {
+            if (evt.target is VisualElement element)
+                element.RemoveFromClassList(k_LinkHoverClass);
         }
 
         private static void EnsureDiscovered()
@@ -113,7 +151,7 @@ namespace DocsForge.Markdown
                     return;
                 }
 
-                // Unregistered container blocks: recurse into children so structure is preserved.
+                // Unregistered type, fallback recursion for structure perseverance.
                 if (block is ContainerBlock container)
                 {
                     foreach (var child in container)
@@ -129,7 +167,7 @@ namespace DocsForge.Markdown
                     return;
                 }
 
-                // Unregistered container inlines: recurse into children.
+                // Unregistered type, fallback recursion for structure perseverance.
                 if (inline is ContainerInline container)
                 {
                     foreach (var child in container)
