@@ -1,4 +1,3 @@
-using System.IO;
 using Unity.Scripting.LifecycleManagement;
 using UnityEditor.PackageManager;
 
@@ -32,6 +31,7 @@ namespace DocsForge.Settings
         private static void Cleanup()
         {
             DocsForgeProjectSettings.DeleteAsset();
+            DocsForgePreferences.DeleteAsset();
         }
     }
 }

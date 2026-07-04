@@ -83,14 +83,27 @@ namespace DocsForge.PostProcessors
         }
         
         /// <summary>
-        /// Retrieve all discovered and registered post processors.  
+        /// Retrieve all discovered and registered post processors.
         /// </summary>
         public static IEnumerable<PostProcessorEntry> GetPostProcessors(Scope scope)
         {
             EnsureDiscovered();
             return s_Entries.Where(e => scope == e.Scope);
         }
-        
+
+        /// <summary>
+        /// Runs every post processor applicable to and enabled for <paramref name="documentation"/>,
+        /// yielding the non-blank generated appendices in registry order. Shared by every consumer that
+        /// needs the full documentation body — preview UI, popups, and (eventually) export.
+        /// </summary>
+        public static IEnumerable<string> GetAppendices(AssetDocumentation documentation)
+        {
+            return GetAllApplicablePostProcessors(documentation, null)
+                .Where(e => e.IsEnabledForAssetScopeDocumentation(documentation))
+                .Select(e => e.Processor.GenerateAppendix(documentation.Target))
+                .Where(appendix => !string.IsNullOrWhiteSpace(appendix));
+        }
+
 
         /// <summary>Clears all entries and resets auto-discovery. For test isolation only.</summary>
         internal static void Reset()

@@ -1,0 +1,152 @@
+/* Window root */
+
+.docsforge-edit-window {
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+/* TabView */
+
+.docsforge-edit-window__tabs {
+    flex-grow: 1;
+    min-height: 0;
+}
+
+#tab-edit,
+#tab-preview,
+#tab-info {
+    flex-grow: 1;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Tab content wrapper */
+
+.docsforge-edit-window__tab-content {
+    flex-grow: 1;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Edit toolbar */
+
+.docsforge-edit-window__edit-toolbar {
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: center;
+    padding: 2px 4px;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--unity-colors-toolbar-border);
+}
+
+.docsforge-edit-window__toolbar-btn {
+    padding: 2px 8px;
+}
+
+.docsforge-edit-window__shortcut-label {
+    color: var(--unity-colors-label-text-disabled);
+    font-size: 11px;
+    margin-left: 4px;
+    -unity-text-align: middle-left;
+}
+
+/* Edit scroll + TextField */
+
+.docsforge-edit-window__edit-scroll {
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.docsforge-edit-window__content-field {
+    min-height: 200px;
+}
+
+.docsforge-edit-window__content-field > .unity-base-field__input {
+    flex-grow: 1;
+    min-height: 200px;
+    padding: 6px;
+    font-size: 12px;
+    white-space: normal;
+}
+
+/* Preview scroll */
+
+.docsforge-edit-window__preview-scroll {
+    flex-grow: 1;
+    padding: 8px;
+}
+
+/* Info scroll */
+
+.docsforge-edit-window__info-scroll {
+    flex-grow: 1;
+}
+
+.docsforge-edit-window__section {
+    padding: 10px 10px 12px 10px;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--unity-colors-default-border);
+}
+
+.docsforge-edit-window__section-header {
+    -unity-font-style: bold;
+    margin-bottom: 8px;
+}
+
+.docsforge-edit-window__info-row {
+    flex-direction: row;
+    margin-bottom: 4px;
+}
+
+.docsforge-edit-window__info-key {
+    min-width: 120px;
+    width: 120px;
+    color: var(--unity-colors-label-text-disabled);
+    -unity-font-style: italic;
+    flex-shrink: 0;
+}
+
+.docsforge-edit-window__info-value {
+    flex-grow: 1;
+    white-space: normal;
+}
+
+/* Processor rows */
+
+.docsforge-edit-window__processor-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 0;
+}
+
+.docsforge-edit-window__processor-status {
+    color: var(--unity-colors-label-text-disabled);
+    -unity-font-style: italic;
+    font-size: 11px;
+}
+
+.docsforge-edit-window__processor-status--disabled {
+    color: var(--unity-colors-error-text);
+}
+
+.docsforge-edit-window__open-settings-btn {
+    margin-top: 8px;
+    align-self: flex-start;
+}
+
+/* Footer */
+
+.docsforge-edit-window__footer {
+    flex-direction: row;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 4px 6px;
+    border-top-width: 1px;
+    border-top-color: var(--unity-colors-toolbar-border);
+}
+
+.docsforge-edit-window__save-btn {
+    min-width: 72px;
+}

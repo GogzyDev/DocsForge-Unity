@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.gogzydev.docsforge/Editor/UI/Windows/DocumentationPopup.uss?fileID=7433441132597879392&amp;guid=b83d613c7dd72661199213e09c513397&amp;type=3#DocumentationPopup"/>
+    <ui:VisualElement class="docsforge-popup">
+        <ui:ScrollView name="scroll" class="docsforge-popup__scroll"/>
+    </ui:VisualElement>
+</ui:UXML>

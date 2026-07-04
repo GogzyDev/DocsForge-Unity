@@ -1,0 +1,9 @@
+.docsforge-popup {
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 6px 8px;
+}
+
+.docsforge-popup__scroll {
+    flex-grow: 1;
+}

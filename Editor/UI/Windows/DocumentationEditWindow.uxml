@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.gogzydev.docsforge/Editor/UI/Windows/DocumentationEditWindow.uss?fileID=7433441132597879392&amp;guid=4c67d6a272713ebf38936eb75d10d0f0&amp;type=3#DocumentationEditWindow"/>   
+    <ui:VisualElement class="docsforge-edit-window">
+
+        <ui:TabView name="tab-view" class="docsforge-edit-window__tabs">
+
+            <ui:Tab label="Edit" name="tab-edit">
+                <ui:VisualElement class="docsforge-edit-window__tab-content">
+                    <ui:VisualElement class="docsforge-edit-window__edit-toolbar">
+                        <ui:Button name="btn-insert-link"
+                                   text="Insert Link"
+                                   tooltip="Insert a docsforge:// URI at the cursor position"
+                                   class="docsforge-edit-window__toolbar-btn"/>
+                        <ui:Label name="lbl-insert-link-shortcut" class="docsforge-edit-window__shortcut-label"/>
+                    </ui:VisualElement>
+                    <ui:ScrollView name="edit-scroll"
+                                   vertical-scroller-visibility="Auto"
+                                   horizontal-scroller-visibility="Hidden"
+                                   class="docsforge-edit-window__edit-scroll">
+                        <ui:TextField name="content-field" multiline="true" class="docsforge-edit-window__content-field"/>
+                    </ui:ScrollView>
+                </ui:VisualElement>
+            </ui:Tab>
+
+            <ui:Tab label="Preview" name="tab-preview">
+                <ui:VisualElement class="docsforge-edit-window__tab-content">
+                    <ui:ScrollView name="preview-scroll" class="docsforge-edit-window__preview-scroll"/>
+                </ui:VisualElement>
+            </ui:Tab>
+
+            <ui:Tab label="Info" name="tab-info">
+                <ui:VisualElement class="docsforge-edit-window__tab-content">
+                    <ui:ScrollView name="info-scroll" class="docsforge-edit-window__info-scroll">
+
+                        <ui:VisualElement class="docsforge-edit-window__section">
+                            <ui:Label text="Asset Information" class="docsforge-edit-window__section-header"/>
+                            <ui:VisualElement class="docsforge-edit-window__info-row">
+                                <ui:Label text="Path"             class="docsforge-edit-window__info-key"/>
+                                <ui:Label name="info-asset-path"  class="docsforge-edit-window__info-value"/>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="docsforge-edit-window__info-row">
+                                <ui:Label text="Global Object ID" class="docsforge-edit-window__info-key"/>
+                                <ui:Label name="info-global-id"   class="docsforge-edit-window__info-value"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+
+                        <ui:VisualElement name="section-asset-processors" class="docsforge-edit-window__section">
+                            <ui:Label text="Asset-Scoped Processors" class="docsforge-edit-window__section-header"/>
+                        </ui:VisualElement>
+
+                        <ui:VisualElement name="section-project-processors" class="docsforge-edit-window__section">
+                            <ui:Label text="Project-Scoped Processors" class="docsforge-edit-window__section-header"/>
+                        </ui:VisualElement>
+
+                    </ui:ScrollView>
+                </ui:VisualElement>
+            </ui:Tab>
+
+        </ui:TabView>
+
+        <ui:VisualElement class="docsforge-edit-window__footer">
+            <ui:Button name="btn-save" text="Save" class="docsforge-edit-window__save-btn"/>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>
