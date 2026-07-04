@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using DocsForge.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
@@ -21,10 +18,7 @@ namespace DocsForge.Storage
         private const string k_UserDataKey = "docsforge";
         private const string k_AssetLabel = "DocsForge";
 
-        private static readonly JsonSerializer k_Serializer = JsonSerializer.Create(new JsonSerializerSettings
-        {
-            ContractResolver = new AssetDocumentationContractResolver()
-        });
+        private static readonly JsonSerializer k_Serializer = JsonSerializer.CreateDefault();
 
         /// <inheritdoc/>
         public AssetDocumentation Read(string guid)
@@ -250,19 +244,6 @@ namespace DocsForge.Storage
                 return;
 
             AssetDatabase.SetLabels(asset, labels.ToArray());
-        }
-        
-        private sealed class AssetDocumentationContractResolver : DefaultContractResolver
-        {
-            protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-            {
-                var property = base.CreateProperty(member, memberSerialization);
-
-                if (member.IsDefined(typeof(NonSerializedAttribute), true))
-                    property.Ignored = true;
-
-                return property;
-            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -25,11 +26,13 @@ namespace DocsForge.Core
         /// The Unity object identity of this asset or sub-object. Set once via <see cref="Initialize"/>
         /// after deserialization; never written to storage.
         /// </summary>
+        [JsonIgnore]
         public GlobalObjectId ObjectId { get; private set; }
 
-        [NonSerialized] private bool m_Initialized;
-        [NonSerialized] private Object m_CachedTarget;
+        [JsonIgnore] private bool m_Initialized;
+        [JsonIgnore] private Object m_CachedTarget;
 
+        [JsonIgnore]
         public Object Target => m_CachedTarget ??= GlobalObjectId.GlobalObjectIdentifierToObjectSlow(ObjectId);
 
         /// <summary>
