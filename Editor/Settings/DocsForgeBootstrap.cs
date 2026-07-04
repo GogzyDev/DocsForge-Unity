@@ -1,6 +1,8 @@
+using System.Runtime.CompilerServices;
 using Unity.Scripting.LifecycleManagement;
 using UnityEditor.PackageManager;
 
+[assembly: InternalsVisibleTo("com.gogzydev.docsforge-tests")]
 namespace DocsForge.Settings
 {
     internal static partial class DocsForgeBootstrap
