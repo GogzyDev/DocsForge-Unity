@@ -12,7 +12,7 @@ namespace DocsForge.Core
         public string DisplayName { get; }
 
         /// <summary>Injectable Markdown combined from <see cref="DisplayName"/> and <see cref="Uri"/></summary>
-        public string Markdown => $"[{DisplayName}]({Uri})]";
+        public string Markdown => $"[{DisplayName}]({Uri})";
 
         /// <summary>Initializes a new <see cref="UriCandidate"/>.</summary>
         public UriCandidate(string uri, string displayName)

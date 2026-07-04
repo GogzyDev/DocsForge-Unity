@@ -1,8 +1,11 @@
+using System;
+using System.Linq;
 using System.Text;
 using DocsForge.Core;
 using DocsForge.UriResolvers;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace DocsForge.PostProcessors
 {
@@ -54,10 +57,28 @@ namespace DocsForge.PostProcessors
                 if (component == null)
                     continue;
 
-                sb.AppendLine($"- `{component.GetType().Name}`");
+                sb.AppendLine($"- {FormatComponentReference(component.GetType())}");
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// URI link to project-defined component, URL link to Unity native component, plain text for everything else (package, plugins).
+        /// </summary>
+        private static string FormatComponentReference(Type type)
+        {
+            if (ProjectTypeCache.GetTypes().Contains(type)
+                && UriResolverRegistry.TryGetResolverByType<TypeUriResolver>(out var typeResolver)
+                && typeResolver.TryMakeUri(type, out var typeUri))
+            {
+                return $"[`{type.Name}`]({typeUri.Uri})";
+            }
+
+            if (type.Namespace != null && type.Namespace.StartsWith("UnityEngine", StringComparison.Ordinal))
+                return $"[`{type.Name}`](https://docs.unity3d.com/ScriptReference/{type.Name}.html)";
+
+            return $"`{type.Name}`";
         }
     }
 }
