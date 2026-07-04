@@ -2,6 +2,7 @@
     "name": "com.gogzydev.docsforge-tests",
     "rootNamespace": "DocsForge.Tests",
     "references": [
+        "com.gogzydev.docsforge",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],
@@ -12,7 +13,8 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll"
+        "nunit.framework.dll",
+        "Newtonsoft.Json.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [
